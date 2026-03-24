@@ -2,7 +2,7 @@ Movie Explorer
 
 ## Description
 
-Movie Explorer is a dynamic web application that allows users to search and explore movies in real time using the OMDB API. The application provides detailed information about movies, including their posters, titles, release years, and other relevant data.
+Movie Explorer is a dynamic web application that allows users to search and explore movies in real time using the API. The application provides detailed information about movies, including their posters, titles, release years, and other relevant data.
 
 It is designed to offer an interactive and user-friendly experience, enabling users to easily discover and organize movie content. The project demonstrates core JavaScript concepts such as API integration, asynchronous programming, and the use of array higher-order functions for efficient data manipulation.
 
@@ -25,3 +25,4 @@ The goal of this project is to build a responsive and interactive web applicatio
 * JavaScript
 * OMDB API
 
+API - https://api.tvmaze.com/shows
