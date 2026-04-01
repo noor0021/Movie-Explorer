@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Gotta Fetch'em All</title>
+  <title>Smart Pokédex</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Pokédex</h1>
+  <h1>Gotta Fetch'em All</h1>
 
   <div class="controls">
     <input type="text" id="search" placeholder="Search Pokémon...">
+    
+    <select id="typeFilter">
+      <option value="">All Types</option>
+      <option value="fire">Fire</option>
+      <option value="water">Water</option>
+      <option value="grass">Grass</option>
+      <option value="electric">Electric</option>
+    </select>
 
     <select id="sort">
-      <option value="">Sort</option>
-      <option value="az">Name A-Z</option>
-      <option value="za">Name Z-A</option>
+      <option value="">Sort By</option>
+      <option value="name">Name</option>
+      <option value="hp">HP</option>
     </select>
   </div>
-
-  <div id="pokemon-container"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
