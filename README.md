@@ -1,28 +1,28 @@
-Movie Explorer 
+Smart Pokédex
+Project Description
 
-## Description
+Smart Pokédex is a web application built using JavaScript that allows users to explore Pokémon data in an interactive and user-friendly way.
 
-Movie Explorer is a dynamic web application that allows users to search and explore movies in real time using the API. The application provides detailed information about movies, including their posters, titles, release years, and other relevant data.
+The application fetches real-time data from a public API and provides features like search, filtering, sorting, and favorites. It demonstrates core concepts of API integration, DOM manipulation, and modern UI design.
 
-It is designed to offer an interactive and user-friendly experience, enabling users to easily discover and organize movie content. The project demonstrates core JavaScript concepts such as API integration, asynchronous programming, and the use of array higher-order functions for efficient data manipulation.
 
-## Objective
+ API Used
 
-The goal of this project is to build a responsive and interactive web application that showcases the ability to fetch, display, and manipulate external data while maintaining clean UI design and optimized performance.
+This project uses the PokéAPI, a free and open RESTful API for Pokémon data.
 
-## Key Features
+ API Base URL:
+https://pokeapi.co/api/v2/
 
-* Real-time movie search using API
-* Dynamic rendering of movie data
-* Filtering and sorting of results
-* Ability to mark movies as favorites
-* Responsive design for multiple devices
+Key Endpoints Used
 
-## Technologies Used
+Get list of Pokémon:
 
-* HTML
-* CSS
-* JavaScript
-* OMDB API
+https://pokeapi.co/api/v2/pokemon?limit=100
 
-API - https://api.tvmaze.com/shows
+Get Pokémon details:
+
+https://pokeapi.co/api/v2/pokemon/{name}
+
+Get Pokémon by type (for filtering):
+
+https://pokeapi.co/api/v2/type/{type}
