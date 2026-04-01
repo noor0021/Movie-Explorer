@@ -4,10 +4,6 @@ body {
   text-align: center;
 }
 
-h1 {
-  color: #e3350d;
-}
-
 .controls {
   margin: 20px;
 }
@@ -17,9 +13,9 @@ input, select {
   margin: 5px;
 }
 
-#pokemon-container {
+#pokemonContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
   padding: 20px;
 }
@@ -28,7 +24,6 @@ input, select {
   background: white;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .card img {
