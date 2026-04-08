@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex Pro | Interface</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="pokedex-app">
+
+    <!-- boot splash screen -->
+    <div id="boot-screen" class="boot-screen">
+      <div class="boot-pokeball">
+        <div class="ball-top"></div>
+        <div class="ball-bottom"></div>
+        <div class="ball-line"></div>
+        <div class="ball-center"></div>
+      </div>
+      <div class="boot-text-wrapper">
+        <div class="boot-text">Gotta fetch'em All</div>
+      </div>
+      <div class="boot-subtitle">SYNCING WITH ARCHIVE...</div>
+      <div class="boot-progress">
+        <div class="boot-progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- the actual pokedex UI -->
+    <div id="pokedex-frame" class="pokedex-frame hidden">
+
+      <!-- left half -->
+      <div class="left-section">
+        <div class="top-lights">
+          <div class="big-blue-light"></div>
+          <div class="small-lights">
+            <div class="light red-light"></div>
+            <div class="light yellow-light"></div>
+            <div class="light green-light"></div>
+          </div>
+        </div>
+
+        <div id="pokemon-display-container"></div>
+
+        <div class="manual-controls">
+          <div class="buttons-row">
+            <button id="shiny-toggle-btn" class="oval-btn" title="Toggle Shiny"></button>
+            <div style="display: flex; gap: 5px">
+              <div class="round-btn secondary"></div>
+              <div class="round-btn secondary"></div>
+            </div>
+            <div class="d-pad-container">
+              <div class="d-pad-bar horiz"></div>
+              <div class="d-pad-bar vert"></div>
+              <button id="d-pad-up" class="d-pad-btn up">▲</button>
+              <button id="d-pad-down" class="d-pad-btn down">▼</button>
+              <button id="d-pad-left" class="d-pad-btn left">◀</button>
+              <button id="d-pad-right" class="d-pad-btn right">▶</button>
+            </div>
+          </div>
+          <div id="status-display" class="status-bar">INITIALIZING...</div>
+        </div>
+      </div>
+
+      <div class="hinge"></div>
+
+      <!-- right half -->
+      <div id="right-section" class="right-section is-closed">
+        <div class="top-menu-tabs">
+          <div class="menu-tab active" data-tab="info">INFO</div>
+          <div class="menu-tab" data-tab="stats">STATS</div>
+          <div class="menu-tab" data-tab="list">LIST</div>
+          <div class="menu-tab" data-tab="filter">GEN</div>
+        </div>
+
+        <div class="lcd-screen-container">
+          <div id="lcd-info-content" class="lcd-info-screen"></div>
+        </div>
+
+        <div class="blue-buttons-grid">
+          <button class="cyan-btn" data-action="tab-list">LIST</button>
+          <button id="fav-btn" class="cyan-btn">FAV</button>
+          <button class="cyan-btn" data-action="toggle-shiny">SHINY</button>
+          <button class="cyan-btn" data-action="tab-filter">GEN</button>
+          <button class="cyan-btn" data-action="tab-stats">STAT</button>
+          <button class="cyan-btn" data-action="tab-info">INFO</button>
+          <button class="cyan-btn">HELP</button>
+          <button class="cyan-btn">OS</button>
+          <button class="cyan-btn" data-action="exit">EXIT</button>
+        </div>
+
+        <div class="right-panel-bottom">
+          <div class="prev-next-nav">
+            <button id="nav-prev-btn" class="nav-btn">◀ PREV</button>
+            <button id="nav-next-btn" class="nav-btn">NEXT ▶</button>
+            <div class="gold-circle"></div>
+          </div>
+          <div class="bottom-dark-bars">
+            <div class="dark-bar">POKEDEX V2.0</div>
+            <div class="dark-bar">STATUS: ONLINE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/constants.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
