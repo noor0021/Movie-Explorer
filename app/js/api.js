@@ -1,4 +1,4 @@
-// simple cache so we dont hit the API for the same thing twice
+
 var cache = {};
 
 async function fetchData(url) {
@@ -12,7 +12,7 @@ async function fetchData(url) {
   return data;
 }
 
-// pads the id to 3 digits like 001, 025 etc
+
 function formatId(id) {
   return String(id).padStart(3, '0');
 }

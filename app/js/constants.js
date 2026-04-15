@@ -1,14 +1,7 @@
-// API base url
+
 const API_URL = 'https://pokeapi.co/api/v2';
 
-// all the pokemon types we can filter by
-const POKEMON_TYPES = [
-  'normal','fire','water','electric','grass','ice',
-  'fighting','poison','ground','flying','psychic','bug',
-  'rock','ghost','dragon','dark','steel','fairy',
-];
 
-// colors for each type badge
 const TYPE_COLORS = {
   normal:'#9da3aa', fire:'#ff6b35', water:'#4a90d9', electric:'#f7c948',
   grass:'#56c568', ice:'#74d0f1', fighting:'#c24f3d', poison:'#a65fc1',
@@ -17,7 +10,6 @@ const TYPE_COLORS = {
   steel:'#6e8ea5', fairy:'#e88fd0',
 };
 
-// gen ranges — start and end IDs
 const POKEMON_GENS = [
   { name: 'All',     start: 1,   end: 1025 },
   { name: 'Gen I',   start: 1,   end: 151  },

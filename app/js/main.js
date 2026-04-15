@@ -1,4 +1,4 @@
-// app state — keeps track of everything
+
 var state = {
     pokemonList: [],
     selectedId: 1,
@@ -9,18 +9,15 @@ var state = {
     shinyMode: false,
     currentGen: 0,
     favorites: [],
-    searchTerm: '',
-    bootPhase: 'splash',
-    isOpened: false
+    searchTerm: ''
 };
 
-// updates the whole UI based on current state
+
 function render() {
-    // left side — pokemon image
+
     var display = document.getElementById('pokemon-display-container');
     display.innerHTML = UI.renderDisplay(state.pokemonData, state.loading, state.shinyMode);
 
-    // status bar at bottom left
     var status = document.getElementById('status-display');
     var isFav = state.favorites.includes(state.selectedId);
     if (state.loading) {
@@ -29,7 +26,7 @@ function render() {
         status.textContent = 'ID: ' + formatId(state.selectedId) + (isFav ? ' ❤️' : '');
     }
 
-    // right side — lcd screen content depends on which tab is active
+
     var lcd = document.getElementById('lcd-info-content');
     if (state.currentTab === 'info') {
         lcd.innerHTML = UI.renderInfo(state.pokemonData, state.speciesData);
@@ -41,7 +38,7 @@ function render() {
         lcd.innerHTML = UI.renderFilter(state.currentGen);
     }
 
-    // highlight the active tab
+
     document.querySelectorAll('.menu-tab').forEach(function(tab) {
         if (tab.getAttribute('data-tab') === state.currentTab) {
             tab.classList.add('active');
@@ -50,7 +47,7 @@ function render() {
         }
     });
 
-    // highlight active action buttons
+
     document.querySelectorAll('.cyan-btn').forEach(function(btn) {
         var action = btn.getAttribute('data-action');
         if (action === 'tab-list') btn.classList.toggle('active', state.currentTab === 'list');
@@ -60,7 +57,7 @@ function render() {
         if (action === 'toggle-shiny') btn.classList.toggle('active', state.shinyMode);
     });
 
-    // fav button text
+
     var favBtn = document.getElementById('fav-btn');
     favBtn.textContent = isFav ? 'REM' : 'FAV';
     if (isFav) favBtn.classList.add('active');
@@ -68,7 +65,6 @@ function render() {
 }
 
 
-// fetches full details for whatever pokemon is currently selected
 async function loadPokemon() {
     state.loading = true;
     render();
@@ -89,7 +85,7 @@ async function loadPokemon() {
 }
 
 
-// go to next/prev pokemon
+
 function goNext() {
     state.selectedId = state.selectedId < 1025 ? state.selectedId + 1 : 1;
     loadPokemon();
@@ -100,19 +96,18 @@ function goPrev() {
 }
 
 
-// wires up all the click handlers
+
 function setupEvents() {
-    // nav buttons
+
     document.getElementById('nav-next-btn').onclick = goNext;
     document.getElementById('nav-prev-btn').onclick = goPrev;
 
-    // d-pad mirrors the nav buttons
     document.getElementById('d-pad-up').onclick = goPrev;
     document.getElementById('d-pad-down').onclick = goNext;
     document.getElementById('d-pad-left').onclick = goPrev;
     document.getElementById('d-pad-right').onclick = goNext;
 
-    // top tabs
+
     document.querySelectorAll('.menu-tab').forEach(function(tab) {
         tab.onclick = function() {
             state.currentTab = this.getAttribute('data-tab');
@@ -120,7 +115,7 @@ function setupEvents() {
         };
     });
 
-    // cyan action buttons on right side
+
     document.querySelectorAll('.cyan-btn').forEach(function(btn) {
         btn.onclick = function() {
             var act = this.getAttribute('data-action');
@@ -129,11 +124,11 @@ function setupEvents() {
             else if (act === 'tab-info') { state.currentTab = 'info'; render(); }
             else if (act === 'tab-filter') { state.currentTab = 'filter'; render(); }
             else if (act === 'toggle-shiny') { state.shinyMode = !state.shinyMode; render(); }
-            else if (act === 'exit') { window.location.href = '../landing/index.html'; }
+            else if (act === 'exit') { window.location.reload(); }
         };
     });
 
-    // fav button
+
     document.getElementById('fav-btn').onclick = function() {
         if (state.favorites.includes(state.selectedId)) {
             state.favorites = state.favorites.filter(function(id) { return id !== state.selectedId; });
@@ -143,14 +138,12 @@ function setupEvents() {
         render();
     };
 
-    // shiny toggle (the red oval button on the left side)
     document.getElementById('shiny-toggle-btn').onclick = function() {
         state.shinyMode = !state.shinyMode;
         render();
     };
 
-    // event delegation for stuff inside the LCD screen
-    // (list items and gen buttons get created dynamically so we catch clicks on the parent)
+
     document.getElementById('lcd-info-content').onclick = function(e) {
         var listItem = e.target.closest('.p-list-item');
         if (listItem) {
@@ -169,11 +162,11 @@ function setupEvents() {
         }
     };
 
-    // search input inside the list tab
+
     document.getElementById('lcd-info-content').oninput = function(e) {
         if (e.target.id === 'list-search-input') {
             state.searchTerm = e.target.value;
-            // only re-render the scroll area so the input doesnt lose focus
+
             var scroll = document.querySelector('.pokemon-list-scroll');
             if (!scroll) return;
 
@@ -185,8 +178,8 @@ function setupEvents() {
             var html = filtered.map(function(pk) {
                 var cls = pk.id === state.selectedId ? 'p-list-item selected' : 'p-list-item';
                 return '<div class="' + cls + '" data-id="' + pk.id + '">' +
-                    '<div style="font-size:0.2rem;color:#666">#' + pk.id + '</div>' +
-                    '<div style="font-size:0.26rem">' + pk.name.toUpperCase() + '</div></div>';
+                    '<div style="font-size:0.35rem;color:#888">#' + pk.id + '</div>' +
+                    '<div style="font-size:0.4rem">' + pk.name.toUpperCase() + '</div></div>';
             }).join('');
 
             scroll.innerHTML = html;
@@ -194,36 +187,32 @@ function setupEvents() {
     };
 }
 
-
-// the opening boot animation sequence
 function bootSequence() {
     var frame = document.getElementById('pokedex-frame');
     var rightPanel = document.getElementById('right-section');
     var bootOverlay = document.getElementById('boot-screen');
 
-    // after 3.5s show the pokedex frame
+    // Show boot screen for 3 seconds, then transition to Pokédex
     setTimeout(function() {
         frame.classList.remove('hidden');
         frame.classList.add('entering');
-    }, 3500);
+    }, 3000);
 
-    // after 4.5s unfold the right panel
     setTimeout(function() {
         rightPanel.classList.remove('is-closed');
-    }, 4500);
+    }, 4000);
 
-    // after 5.8s hide boot screen, show final state
     setTimeout(function() {
         bootOverlay.classList.add('fade-out');
         frame.classList.remove('entering');
         frame.classList.add('ready');
-    }, 5800);
+    }, 5300);
 }
 
 
-// kicks everything off when page loads
+
 document.addEventListener('DOMContentLoaded', async function() {
-    // load the full pokemon list first
+
     try {
         var data = await fetchData(API_URL + '/pokemon?limit=1025');
         state.pokemonList = data.results.map(function(item, index) {
